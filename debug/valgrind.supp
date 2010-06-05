@@ -1,0 +1,51 @@
+{
+   MySQL connect 
+   Memcheck:Leak
+   fun:malloc
+   fun:my_once_alloc
+   fun:init_state_maps
+   fun:init_available_charsets
+   fun:get_charset_by_csname
+   fun:mysql_init_character_set
+   fun:mysql_real_connect
+}
+
+{
+   MySQL charset
+   Memcheck:Leak
+   fun:malloc
+   fun:my_once_alloc
+   fun:my_once_strdup
+   fun:add_collation
+   fun:cs_leave
+   fun:my_xml_leave
+   fun:my_xml_parse
+   fun:my_parse_charset_xml
+   fun:my_read_charset_file
+   fun:init_available_charsets
+   fun:get_charset_by_csname
+   fun:mysql_init_character_set
+}
+
+{
+   MySQL XML
+   Memcheck:Leak
+   fun:malloc
+   fun:my_once_alloc
+   fun:add_collation
+   fun:cs_leave
+   fun:my_xml_leave
+   fun:my_xml_parse
+   fun:my_parse_charset_xml
+   fun:my_read_charset_file
+   fun:init_available_charsets
+   fun:get_charset_by_csname
+   fun:mysql_init_character_set
+   fun:mysql_real_connect
+}
+
+{
+   MySQL no idea
+   Memcheck:Free
+   fun:_ZdlPv
+}

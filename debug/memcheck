@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# any arguments are passed to valgrind
+
+cd ../ &&
+make && 
+
+valgrind --tool=memcheck --suppressions=./debug/valgrind.supp $1 ./bin/mysequel
