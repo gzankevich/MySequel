@@ -4,7 +4,7 @@ MySQLConnector::MySQLConnector()
 {
 	this->connection = mysql_init(NULL);
 
-	if(!mysql_real_connect(this->connection, "localhost", "root", "altec9033", "facebrush", 0, NULL, 0))
+	if(!mysql_real_connect(this->connection, "localhost", "root", "altec9033", "healing_powders", 0, NULL, 0))
 		throw mysql_error(this->connection);
 }
 

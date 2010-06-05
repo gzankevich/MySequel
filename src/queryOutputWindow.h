@@ -8,6 +8,7 @@
 #include "windowInterface.h"
 #include "colourScheme.h"
 #include "outputMessageBuffer.h"
+#include "resultInterface.h"
 
 /**
  * Output window for QueryMode.
@@ -21,6 +22,7 @@ class QueryOutputWindow : public IWindow
 	protected:
 		int lineCounter;
 		std::vector<QueryOutputMessage*> buffer;
+		std::vector<IResult*> resultBuffer;
 
 	public:
 		/**

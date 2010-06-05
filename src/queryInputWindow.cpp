@@ -20,6 +20,8 @@ QueryInputWindow::QueryInputWindow(MySQLConnector *connector, QueryOutputWindow 
 	// ncurses uses escape to start character sequences and so has a default delay
 	// of 1000 milliseconds on the escape key
 	ESCDELAY = 10;
+
+	this->refresh();
 }
 
 QueryInputWindow::~QueryInputWindow()
@@ -84,6 +86,23 @@ bool QueryInputWindow::keyDown(int key)
 			this->refresh();
 		}
 	}
+	else if(key == KEY_UP || key == KEY_DOWN)
+	{
+
+	}
+	else if(key == KEY_BACKSPACE || key == 127)
+	{
+		// check cursor offset here so that we trap backspace key
+		// even if we're at the start of the buffer
+		if(this->cursorOffset > 0)
+		{
+			// TODO: take into account that the cursor might be in the middle
+			// of the buffer - substr is getting rid of the stuff after the cursor
+			this->cursorOffset--;
+			this->buffer = this->buffer.substr(0, this->cursorOffset);
+			this->refresh();
+		}
+	}
 	else 
 	{
 		stringstream ss;
@@ -122,7 +141,18 @@ void QueryInputWindow::refresh()
 	wclear(this->window);
 	mvwprintw(this->window, 0, 0, this->buffer.c_str());
 	wcolor_set(this->window, 1, NULL);
-	mvwprintw(this->window, 0, this->cursorOffset, "|");
+
+	if(this->buffer.size() > 0 && this->cursorOffset < this->buffer.size())
+	{
+		stringstream ss;
+		ss<<this->buffer[0];
+		string character = ss.str();
+
+		mvwprintw(this->window, 0, this->cursorOffset, character.c_str());
+	}
+	else
+		mvwprintw(this->window, 0, this->cursorOffset, " ");
+
 	wcolor_set(this->window, 2, NULL);
 
 	IWindow::refresh();
